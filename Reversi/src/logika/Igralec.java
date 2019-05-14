@@ -1,13 +1,13 @@
 package logika;
 
 public enum Igralec {
-	CRNO, BELO;
+	CRNI, BELI;
 
 	public Igralec nasprotnik() {
-		return (this == CRNO ? BELO : CRNO);
+		return (this == CRNI ? BELI : CRNI);
 	}
 
 	public Polje getPolje() {
-		return (this == CRNO ? Polje.CRNO : Polje.BELO);
+		return (this == CRNI ? Polje.CRNO : Polje.BELO);
 	}
 }

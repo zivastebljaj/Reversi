@@ -1,9 +1,9 @@
 package logika;
 
 public enum Stanje {
-	NA_POTEZI_CRNO,
-	NA_POTEZI_BELO,
-	ZMAGA_CRNO,
-	ZMAGA_BELO,
+	//NA_POTEZI_C,
+	//NA_POTEZI_B,
+	ZMAGA_CRNI,
+	ZMAGA_BELI,
 	NEODLOCENO;
 }
