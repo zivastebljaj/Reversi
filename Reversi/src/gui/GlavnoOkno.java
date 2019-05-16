@@ -78,17 +78,17 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		
 		// zaènemo novo igro èloveka proti raèunalniku
 		
-		vodja.novaIgra(Igralec.BELO);
+		vodja.novaIgra(Igralec.BELI);
 	}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == igraClovekRacunalnik) {
-			vodja.novaIgra(Igralec.BELO);
+			vodja.novaIgra(Igralec.BELI);
 		}
 		else if (e.getSource() == igraRacunalnikClovek) {
-			vodja.novaIgra(Igralec.CRNO);
+			vodja.novaIgra(Igralec.CRNI);
 		}
 		
 	}
@@ -101,8 +101,8 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			switch(vodja.igra.stanje()) {
 			case NA_POTEZI_BELO: status.setText("Na potezi je beli."); break;
 			case NA_POTEZI_CRNO: status.setText("Na potezi je èrni."); break;
-			case ZMAGA_BELO: status.setText("Zmagal je beli."); break;
-			case ZMAGA_CRNO: status.setText("Zmagal je èrni."); break;
+			case ZMAGA_BELI: status.setText("Zmagal je beli."); break;
+			case ZMAGA_CRNI: status.setText("Zmagal je èrni."); break;
 			case NEODLOCENO: status.setText("Neodloèeno!"); break;
 			}
 		}
