@@ -34,12 +34,18 @@ public class Test {
 		printPlosca(i.plosca);
 		i.narediPotezo(5, 5);
 		printPlosca(i.plosca);
-		i.narediPotezo(5, 5);
-		printPlosca(i.plosca);
 		i.narediPotezo(6, 5);
 		printPlosca(i.plosca);
 		i.narediPotezo(2, 4);
 		printPlosca(i.plosca);
+		//Map<int[], Set<int[]>> poteze = i.moznePoteze();
+		//for (int[] poteza: poteze.keySet()) {
+			//Set<int[]> mn = poteze.get(poteza);
+			//for (int[] polje : mn) {
+				//System.out.println(poteza[0] + ", " + poteza[1] + ": " + polje[0] + "#" + polje[1]);
+			//}
+   
+		//}
 	
 	
 
