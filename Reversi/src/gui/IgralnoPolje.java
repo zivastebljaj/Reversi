@@ -40,7 +40,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 	}
 	
 
-	private void paintBelo(Graphics2D g2, int i, int j) {
+	private void paintBeli(Graphics2D g2, int i, int j) {
 		double w = squareWidth();
 		double r = w * (1.0 - LINE_WIDTH - 2.0 * PADDING); // premer O
 		double x = w * (i + 0.5 * LINE_WIDTH + PADDING);
@@ -50,7 +50,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		g2.drawOval((int)x, (int)y, (int)r , (int)r);
 	}
 	
-	private void paintCrno(Graphics2D g2, int i, int j) {
+	private void paintCrni(Graphics2D g2, int i, int j) {
 		double w = squareWidth();
 		double r = w * (1.0 - LINE_WIDTH - 2.0 * PADDING); // premer O
 		double x = w * (i + 0.5 * LINE_WIDTH + PADDING);
@@ -90,8 +90,8 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 			for (int i = 0; i < Igra.N; i++) {
 				for (int j = 0; j < Igra.N; j++) {
 					switch(plosca[i][j]) {
-					case CRNO: paintCrno(g2, i, j); break;
-					case BELO: paintBelo(g2, i, j); break;
+					case CRNO: paintCrni(g2, i, j); break;
+					case BELO: paintBeli(g2, i, j); break;
 					default: break;
 					}
 				}

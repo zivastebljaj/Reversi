@@ -18,10 +18,10 @@ public class Igra {
 	public Igralec naPotezi;
 	
 	//public za test
-	public int stevecBelih;
-	public int stevecCrnih;
+	public static int stevecBelih;
+	public static int stevecCrnih;
 	
-	public Stanje stanjeIgre;
+	public static Stanje stanjeIgre;
 	
 	
 	int[][] smeri = {{1,0},{-1,0},{0,1},{0,-1},{-1,-1},{1,-1},{-1,1},{1,1}};

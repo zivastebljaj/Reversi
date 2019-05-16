@@ -7,7 +7,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import logika.Igra;
 import logika.Igralec;
+import logika.Stanje;
 
 @SuppressWarnings("serial")
 public class GlavnoOkno extends JFrame implements ActionListener {
@@ -19,6 +21,10 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	
 	//Statusna vrstica v spodnjem delu okna
 	private JLabel status;
+	
+	//Rezultat belih in èrnih
+	private JLabel bel;
+	private JLabel crn;
 
 	
 	// Vodja igre
@@ -64,6 +70,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		polje_layout.weightx = 1.0;
 		polje_layout.weighty = 1.0;
 		getContentPane().add(polje, polje_layout);
+				
 		
 		// statusna vrstica za sporoèila
 		status = new JLabel();
@@ -75,6 +82,30 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		status_layout.gridy = 1;
 		status_layout.anchor = GridBagConstraints.CENTER;
 		getContentPane().add(status, status_layout);
+		
+		
+		// rezultat beli
+		bel = new JLabel();
+		bel.setFont(new Font(bel.getFont().getName(),
+							    bel.getFont().getStyle(),
+							    20));
+		GridBagConstraints bel_layout = new GridBagConstraints();
+		bel_layout.gridx = 0;
+		bel_layout.gridy = 2;
+		bel_layout.anchor = GridBagConstraints.CENTER;
+		getContentPane().add(bel, bel_layout);
+		
+		// rezultat crni
+		crn = new JLabel();
+		crn.setFont(new Font(crn.getFont().getName(),
+								crn.getFont().getStyle(),
+							    20));
+		GridBagConstraints crn_layout = new GridBagConstraints();
+		crn_layout.gridx = 0;
+		crn_layout.gridy = 3;
+		crn_layout.anchor = GridBagConstraints.CENTER;
+		getContentPane().add(crn, crn_layout);
+				
 		
 		// zaènemo novo igro èloveka proti raèunalniku
 		
@@ -94,18 +125,22 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	}
 
 	public void osveziGUI() {
-		if (vodja.igra == null) {
+		if (Igra.stanjeIgre == null) {
 			status.setText("Igra ni v teku.");
+			bel.setText("BELI: " + Integer.toString(Igra.stevecBelih));
+			crn.setText("CRNI: " + Integer.toString(Igra.stevecCrnih));
 		}
 		else {
-			switch(vodja.igra.stanje()) {
-			case NA_POTEZI_BELO: status.setText("Na potezi je beli."); break;
-			case NA_POTEZI_CRNO: status.setText("Na potezi je èrni."); break;
-			case ZMAGA_BELI: status.setText("Zmagal je beli."); break;
-			case ZMAGA_CRNI: status.setText("Zmagal je èrni."); break;
-			case NEODLOCENO: status.setText("Neodloèeno!"); break;
-			}
+			if (Igra.stanjeIgre == Stanje.NA_POTEZI_B) status.setText("Na potezi je beli.");
+			if (Igra.stanjeIgre == Stanje.NA_POTEZI_C) status.setText("Na potezi je èrni.");
+			if (Igra.stanjeIgre == Stanje.ZMAGA_BELI) status.setText("Zmagal je beli.");
+			if (Igra.stanjeIgre == Stanje.ZMAGA_CRNI) status.setText("Zmagal je èrni.");
+			if (Igra.stanjeIgre == Stanje.NEODLOCENO) status.setText("Neodloèeno!");
 		}
+		
+		bel.setText("BELI: " + Integer.toString(Igra.stevecBelih));
+		crn.setText("CRNI: " + Integer.toString(Igra.stevecCrnih));
+		
 		polje.repaint();
 	}
 	
