@@ -9,6 +9,7 @@ import javax.swing.*;
 import logika.Igra;
 import logika.Polje;
 import logika.Poteza;
+import logika.Vodja;
 
 @SuppressWarnings("serial")
 public class IgralnoPolje extends JPanel implements MouseListener {
@@ -40,7 +41,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 	}
 	
 
-	private void paintBelo(Graphics2D g2, int i, int j) {
+	private void paintBeli(Graphics2D g2, int i, int j) {
 		double w = squareWidth();
 		double r = w * (1.0 - LINE_WIDTH - 2.0 * PADDING); // premer O
 		double x = w * (i + 0.5 * LINE_WIDTH + PADDING);
@@ -50,7 +51,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		g2.drawOval((int)x, (int)y, (int)r , (int)r);
 	}
 	
-	private void paintCrno(Graphics2D g2, int i, int j) {
+	private void paintCrni(Graphics2D g2, int i, int j) {
 		double w = squareWidth();
 		double r = w * (1.0 - LINE_WIDTH - 2.0 * PADDING); // premer O
 		double x = w * (i + 0.5 * LINE_WIDTH + PADDING);
@@ -86,12 +87,12 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		// križci in krožci
 		Polje[][] plosca;;
 		if (vodja.igra != null) {
-			plosca = vodja.igra.getPlosca();
+			plosca = vodja.igra.plosca;
 			for (int i = 0; i < Igra.N; i++) {
 				for (int j = 0; j < Igra.N; j++) {
 					switch(plosca[i][j]) {
-					case CRNO: paintCrno(g2, i, j); break;
-					case BELO: paintBelo(g2, i, j); break;
+					case CRNO: paintCrni(g2, i, j); break;
+					case BELO: paintBeli(g2, i, j); break;
 					default: break;
 					}
 				}
@@ -104,6 +105,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		if (vodja.clovekNaVrsti) {
 			int x = e.getX();
 			int y = e.getY();
+			System.out.println(x + ", " + y);
 			int w = (int)(squareWidth());
 			int i = x / w ;
 			double di = (x % w) / squareWidth() ;

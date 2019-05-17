@@ -18,13 +18,14 @@ public class Igra {
 	public Igralec naPotezi;
 	
 	//public za test
-	public int stevecBelih;
-	public int stevecCrnih;
+	public static int stevecBelih;
+	public static int stevecCrnih;
 	
-	public Stanje stanjeIgre;
+	public static Stanje stanjeIgre;
 	
 	
 	int[][] smeri = {{1,0},{-1,0},{0,1},{0,-1},{-1,-1},{1,-1},{-1,1},{1,1}};
+
 
 	//nastavi zacetno stanje
 	public Igra() {
@@ -42,7 +43,7 @@ public class Igra {
 		naPotezi = Igralec.CRNI;
 		stevecBelih = 2;
 		stevecCrnih = 2;
-		stanjeIgre = Stanje.NEODLOCENO;
+		stanjeIgre = Stanje.NA_POTEZI_C;
 	}
 	
 	// Vrne slovar moznih potez skupaj s poljem, s katerega lahko naredimo potezo.
@@ -50,8 +51,7 @@ public class Igra {
 		Map<int[], Set<int[]>> poteze = new HashMap<int[], Set<int[]>>();
 		for (int i = 0; i<8; i++) {
 			for (int j = 0; j<8; j++) {
-				if (plosca[i][j] == naPotezi.getPolje()){
-															
+				if (plosca[i][j] == naPotezi.getPolje()){															
 					for (int[] smer : smeri) {
 						int dx = smer[0];
 						int dy = smer[1];
@@ -59,7 +59,7 @@ public class Igra {
 						int l = j + dy;
 						while ((0 <= k) &&(k <= 7) && (0 <= l) && (l <= 7)) {
 							if (plosca[k][l] == naPotezi.getPolje()) break;							
-							if (plosca[k][l] == Polje.PRAZNO && plosca[k-dx][l-dy] == naPotezi.nasprotnik().getPolje()) {
+							else if (plosca[k][l] == Polje.PRAZNO && plosca[k-dx][l-dy] == naPotezi.nasprotnik().getPolje()) {
 								//System.out.println("y");
 								int[] zacetnoPolje = new int[2];
 								zacetnoPolje[0] = i;
@@ -81,22 +81,19 @@ public class Igra {
 									poteze.put(koncnoPolje, zacetnaPolja);
 									break;
 									}
-								
-								
 								}
-							k += dx;
-							l += dy;
-								
-								
+							else {
+								k += dx;
+								l += dy;
+								}
 							}
-													
 						}
 					}
 				}
 			}
-		printPoteze(poteze);
+		//printPoteze(poteze);
 		return poteze;
-		}
+	}
 	public int[] vsebuje(Set<int[]> polja, int[] polje) {
 		if (polja.size() == 0) return null;
 		else {
@@ -134,8 +131,8 @@ public class Igra {
 		while ((i<=7) && (j<=7)) {
 			if (plosca[i][j] == naPotezi.nasprotnik().getPolje()) {
 				plosca[i][j] = naPotezi.getPolje();
-				i = i + dx;
-				j = j + dy;
+				i += dx;
+				j += dy;
 				//System.out.println(i + ", " +j);
 			}
 
@@ -144,11 +141,11 @@ public class Igra {
 		
 	}
 	//Če možnih potez ni več, igro končamo. Sicer pobarvamo ustrezna polja in zamenjamo igralca.
-	public void narediPotezo(int x, int y) {
+	public void narediPotezo(Poteza poteza) {
 		Map <int[], Set<int[]>> moznePoteze = moznePoteze();
-		int[] poteza = new int[2];
-		poteza[0] = x;
-		poteza[1] = y;
+		int x = poteza.getX();
+		int y = poteza.getY();
+		int[] polje = {x, y};
 		boolean stikalo = false;
 		Set<int[]> zacetnaPolja = new HashSet<int[]>();
 		if (moznePoteze().size() == 0) {
@@ -159,18 +156,18 @@ public class Igra {
 			}
 		else {
 			for (int[] koncnoPolje : moznePoteze.keySet()) {
-				if (Arrays.equals(koncnoPolje, poteza)) {
+				if (Arrays.equals(koncnoPolje, polje)) {
 					zacetnaPolja = moznePoteze.get(koncnoPolje);
 					//System.out.println("Koncno polje = " + koncnoPolje[0] +", " + koncnoPolje[1]);
-					for (int[] polje: zacetnaPolja) System.out.println(polje[0] + "#" + polje[1]);
+					for (int[] p: zacetnaPolja) System.out.println(polje[0] + "#" + polje[1]);
 					stikalo = true;
-					break;}
+					}
 			}
 			if (stikalo) {
 				plosca[x][y] = naPotezi.getPolje();
 				for(int[] zacetnoPolje : zacetnaPolja){
 					//System.out.println("aaa");
-					pobarvajMed(zacetnoPolje, poteza);
+					pobarvajMed(zacetnoPolje, polje);
 						}
 					
 					}

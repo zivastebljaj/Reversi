@@ -7,6 +7,10 @@ public class Test {
 	public static void main(String[] args) {
 		Igra i = new Igra();
 		printPlosca(i.plosca);
+		i.printPoteze(i.moznePoteze());
+		Poteza poteza = new Poteza();
+		int x = poteza.getX();
+		int y = poteza.getY();
 		//System.out.print(i.moznePoteze());
 		//int[] polje1 = {4,3};
 		//int[] polje2 = {2,3};
@@ -16,36 +20,20 @@ public class Test {
 		//int[] polje4 = {5,5};
 		//i.pobarvajMed(polje3, polje4);
 		//printPlosca(i.plosca);
-		i.narediPotezo(2, 3);
-		printPlosca(i.plosca);
-		//printPoteze(i.moznePoteze());
-		i.narediPotezo(2, 2);
-		printPlosca(i.plosca);
-		//printPoteze(i.moznePoteze());
-		i.narediPotezo(4, 5);
-		printPlosca(i.plosca);
+//	i.narediPotezo(2, 3);
+//		printPlosca(i.plosca);
+//		//printPoteze(i.moznePoteze());
+//		i.narediPotezo(2, 2);
+//		printPlosca(i.plosca);
+//		//printPoteze(i.moznePoteze());
+//		i.narediPotezo(4, 5);
+//		printPlosca(i.plosca);
 		//i.narediPotezo(0, 0);
 		//System.out.println(i.naPotezi.getPolje().toString());
 		//System.out.println(i.stevecBelih);
 		//printPoteze(i.moznePoteze());
-		i.narediPotezo(1, 3);
-		printPlosca(i.plosca);
-		i.narediPotezo(0, 3);
-		printPlosca(i.plosca);
-		i.narediPotezo(5, 5);
-		printPlosca(i.plosca);
-		i.narediPotezo(6, 5);
-		printPlosca(i.plosca);
-		i.narediPotezo(2, 4);
-		printPlosca(i.plosca);
-		//Map<int[], Set<int[]>> poteze = i.moznePoteze();
-		//for (int[] poteza: poteze.keySet()) {
-			//Set<int[]> mn = poteze.get(poteza);
-			//for (int[] polje : mn) {
-				//System.out.println(poteza[0] + ", " + poteza[1] + ": " + polje[0] + "#" + polje[1]);
-			//}
-   
-		//}
+
+
 	
 	
 
