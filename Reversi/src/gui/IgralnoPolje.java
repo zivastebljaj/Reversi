@@ -48,7 +48,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		double y = w * (j + 0.5 * LINE_WIDTH + PADDING);
 		g2.setColor(Color.white);
 		g2.setStroke(new BasicStroke((float) (w * LINE_WIDTH)));
-		g2.drawOval((int)x, (int)y, (int)r , (int)r);
+		g2.fillOval((int)x, (int)y, (int)r , (int)r);
 	}
 	
 	private void paintCrni(Graphics2D g2, int i, int j) {
@@ -58,7 +58,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		double y = w * (j + 0.5 * LINE_WIDTH + PADDING);
 		g2.setColor(Color.black);
 		g2.setStroke(new BasicStroke((float) (w * LINE_WIDTH)));
-		g2.drawOval((int)x, (int)y, (int)r , (int)r);
+		g2.fillOval((int)x, (int)y, (int)r , (int)r);
 	}
 	
 	@Override
