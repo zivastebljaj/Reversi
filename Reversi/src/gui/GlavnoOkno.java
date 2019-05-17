@@ -10,6 +10,7 @@ import javax.swing.*;
 import logika.Igra;
 import logika.Igralec;
 import logika.Stanje;
+import logika.Vodja;
 
 @SuppressWarnings("serial")
 public class GlavnoOkno extends JFrame implements ActionListener {
