@@ -159,20 +159,22 @@ public class Igra {
 				if (Arrays.equals(koncnoPolje, polje)) {
 					zacetnaPolja = moznePoteze.get(koncnoPolje);
 					//System.out.println("Koncno polje = " + koncnoPolje[0] +", " + koncnoPolje[1]);
-					for (int[] p: zacetnaPolja) System.out.println(polje[0] + "#" + polje[1]);
+					//for (int[] p: zacetnaPolja) System.out.println(polje[0] + "#" + polje[1]);
 					stikalo = true;
 					}
 			}
 			if (stikalo) {
 				plosca[x][y] = naPotezi.getPolje();
 				for(int[] zacetnoPolje : zacetnaPolja){
-					//System.out.println("aaa");
 					pobarvajMed(zacetnoPolje, polje);
 					System.out.println("barvam med" + zacetnoPolje[0] + ", " + zacetnoPolje[1] + " in "+polje[0] + ", " + polje[1]);
 						}
 					
 					}
+			prestejPolja();
 			naPotezi = naPotezi.nasprotnik();
+			if (stanjeIgre == Stanje.NA_POTEZI_B) stanjeIgre = Stanje.NA_POTEZI_C;
+			else if (stanjeIgre == Stanje.NA_POTEZI_C) stanjeIgre = Stanje.NA_POTEZI_B;
 			//printPlosca(plosca);
 				}
 			
@@ -182,6 +184,7 @@ public class Igra {
 	//Da vemo, kdo je zmagovalec, preštejemo število črnih in belih polj.
 	public void prestejPolja() {
 		stevecBelih = 0;
+		stevecCrnih = 0;
 		for (int i = 0; i<8; i++) {
 			for (int j = 0; j<8; j++) {
 				if (plosca[i][j] == Polje.BELO) stevecBelih += 1;
