@@ -120,7 +120,7 @@ public class Igra {
 			else dx = (x2 - x1)/(x2 - x1);
 		}
 		if ((y1 - y2) != 0) {
-			if (x1 > x2) dy = (y2 - y1)/(y1 - y2);
+			if (y1 > y2) dy = (y2 - y1)/(y1 - y2);
 			else dy = (y2 - y1)/(y2 - y1);
 		}
 
@@ -168,11 +168,12 @@ public class Igra {
 				for(int[] zacetnoPolje : zacetnaPolja){
 					//System.out.println("aaa");
 					pobarvajMed(zacetnoPolje, polje);
+					System.out.println("barvam med" + zacetnoPolje[0] + ", " + zacetnoPolje[1] + " in "+polje[0] + ", " + polje[1]);
 						}
 					
 					}
 			naPotezi = naPotezi.nasprotnik();
-			//System.out.println(naPotezi.toString());
+			//printPlosca(plosca);
 				}
 			
 			
@@ -205,5 +206,23 @@ public class Igra {
 			
 		}
 	}
+	public static String pretvoriPolje(Polje p) {
+		if (p == Polje.PRAZNO) return " ";
+		if (p == Polje.CRNO) return "*";
+		else return "o";
+	}
+	public static void printPlosca(Polje[][] M) {
+		if (M == null) System.out.println("null");
+		else {
+			for (int i = 0; i < M.length; i++) {
+				for (int j = 0; j < M[0].length; j++) {
+					if (j == 0) System.out.print("|");
+					System.out.print(pretvoriPolje(M[i][j]) + " |");
+				}
+				System.out.println();
+			}
+		}
+	}
+	
 	
 }
