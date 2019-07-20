@@ -129,7 +129,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		if (Igra.stanjeIgre == null) {
 			status.setText("Igra ni v teku.");
 			bel.setText("BELI: " + Integer.toString(Igra.stevecBelih));
-			crn.setText("CRNI: " + Integer.toString(Igra.stevecCrnih));
+			crn.setText("ÈRNI: " + Integer.toString(Igra.stevecCrnih));
 		}
 		else {
 			if (Igra.stanjeIgre == Stanje.NA_POTEZI_B) status.setText("Na potezi je beli.");

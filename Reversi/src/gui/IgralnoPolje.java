@@ -21,7 +21,7 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 	
 	public IgralnoPolje(Vodja vodja) {
 		super();
-		setBackground(Color.pink);
+		setBackground(Color.getHSBColor(101, 28, 82));
 		this.addMouseListener(this);
 		
 		this.vodja = vodja;
@@ -40,7 +40,8 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		return Math.min(getWidth(), getHeight()) / Igra.N;
 	}
 	
-
+	// beli in crni krozci
+	
 	private void paintBeli(Graphics2D g2, int i, int j) {
 		double w = squareWidth();
 		double r = w * (1.0 - LINE_WIDTH - 2.0 * PADDING); // premer O
@@ -84,7 +85,6 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		
 		System.out.println(vodja);
 		
-		// križci in krožci
 		Polje[][] plosca;;
 		if (vodja.igra != null) {
 			plosca = vodja.igra.plosca;

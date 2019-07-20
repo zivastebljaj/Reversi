@@ -8,10 +8,6 @@ public class Poteza {
 		this.x = x;
 		this.y = y;
 	}
-//public za test
-	public Poteza() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getX() {
 		return x;

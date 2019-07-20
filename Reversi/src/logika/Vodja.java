@@ -1,23 +1,15 @@
 
 package logika;
 
-import java.util.Random;
-
-//import inteligenca.OcenjenaPoteza;
-//import inteligenca.Minimax;
+import inteligenca.*;
 
 import java.util.List;
+import java.util.Random;
+
 import gui.GlavnoOkno;
 
 
-/**
- * @author AS
- * Hrani trenutno stanje igre in nadzoruje potek igre.
- */
-
 public class Vodja {
-	
-	private Random random;
 	
 	// Glavno okno
 	private GlavnoOkno okno;
@@ -25,13 +17,11 @@ public class Vodja {
 	// Igra, ki jo trenutno igramo.
 	public Igra igra;
 	
-	// Ali je Älovek O ali X?
 	private Igralec clovek;	
 	
 	public boolean clovekNaVrsti;
 		
 	public Vodja(GlavnoOkno okno) {
-		random = new Random();
 		this.okno = okno;
 		clovekNaVrsti = true;
 	}
@@ -43,6 +33,7 @@ public class Vodja {
 		igramo();
 	}
 	
+	@SuppressWarnings("static-access")
 	public void igramo () {
 		okno.osveziGUI();
 		switch (igra.stanjeIgre) {
@@ -50,28 +41,28 @@ public class Vodja {
 		case ZMAGA_CRNI: 
 		case NEODLOCENO: 
 			break;
-		case NA_POTEZI_B:
+		case NA_POTEZI_B:		
 		case NA_POTEZI_C: 
 			if (igra.naPotezi == clovek) {
 				clovekNaVrsti = true;
 //			} else {
-//				racunalnikovaPoteza(Poteza poteza);
-//			}
-			}
+//				racunalnikovaPoteza();
+			}			
 		}
 	}
 	
-	public void racunalnikovaPoteza(Poteza poteza) {
-		//List<OcenjenaPoteza> ocenjenePoteze = Minimax.oceniPoteze (igra, 2, clovek.nasprotnik());
-		//Poteza poteza = Minimax.maxPoteza(ocenjenePoteze);
+	public void racunalnikovaPoteza() {
+		List<OcenjenaPoteza> ocenjenePoteze = Minimax.oceniPoteze (igra, 2, clovek.nasprotnik());
+		Poteza poteza = Minimax.maxPoteza(ocenjenePoteze);
 		igra.narediPotezo(poteza);
 		igramo();
 	}
 	
+	
 	public void clovekovaPoteza(Poteza poteza) {
 		igra.narediPotezo(poteza);
-		System.out.println("Delam potezo");
-			//clovekNaVrsti = false;	
+		System.out.println("Delam potezo" + poteza);
+			// clovekNaVrsti = false;	
 			igramo();
 		
 		

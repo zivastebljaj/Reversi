@@ -46,6 +46,11 @@ public class Igra {
 		stanjeIgre = Stanje.NA_POTEZI_C;
 	}
 	
+	//za minmax
+	public Polje[][] getPlosca() {
+		return plosca;
+	}
+	
 	// Vrne slovar moznih potez skupaj s poljem, s katerega lahko naredimo potezo.
 	public Map<int[], Set<int[]>> moznePoteze(){
 		Map<int[], Set<int[]>> poteze = new HashMap<int[], Set<int[]>>();
@@ -94,6 +99,7 @@ public class Igra {
 		//printPoteze(poteze);
 		return poteze;
 	}
+	
 	public int[] vsebuje(Set<int[]> polja, int[] polje) {
 		if (polja.size() == 0) return null;
 		else {
@@ -214,6 +220,7 @@ public class Igra {
 		if (p == Polje.CRNO) return "*";
 		else return "o";
 	}
+	
 	public static void printPlosca(Polje[][] M) {
 		if (M == null) System.out.println("null");
 		else {
@@ -226,6 +233,5 @@ public class Igra {
 			}
 		}
 	}
-	
 	
 }
