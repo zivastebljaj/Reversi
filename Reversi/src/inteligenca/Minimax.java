@@ -2,6 +2,8 @@ package inteligenca;
 
 import java.util.*;
 
+
+
 import logika.*;
 
 public class Minimax {
@@ -16,13 +18,11 @@ public class Minimax {
 		List<OcenjenaPoteza> ocenjenePoteze = new LinkedList<OcenjenaPoteza> ();
 		Map<int[], Set<int[]>> moznePoteze = igra.moznePoteze();
 		for (int[] k : moznePoteze.keySet() ) {
-			for (int[] a: moznePoteze.get(k)) {
-				Poteza p = new Poteza(a[0], a[1]);
-				Igra zacasna_Igra = new Igra();
-				zacasna_Igra.narediPotezo(p);
-				int ocena = minimaxPozicijo (zacasna_Igra, globina-1, jaz);
-				ocenjenePoteze.add(new OcenjenaPoteza(p, ocena));			
-			}
+			Poteza p = new Poteza(k[0], k[1]);
+			Igra zacasna_Igra = new Igra();
+			zacasna_Igra.narediPotezo(p);
+			int ocena = minimaxPozicijo (zacasna_Igra, globina-1, jaz);
+			ocenjenePoteze.add(new OcenjenaPoteza(p, ocena));
 		}
 		return ocenjenePoteze;
 	}
@@ -72,7 +72,29 @@ public class Minimax {
 	}
 	
 	// Metoda oceniPozicijo je odvisna od igre !!!
+	//public static int oceniPozicijo(Igra igra, Igralec jaz) {
+	//	int ocena = 0;
+	//	for (Vrsta v : Igra.VRSTE) {
+	//		ocena = ocena + oceniVrsto(v, igra, jaz);
+	//	}
+	//	return ocena;	
+	//}
 	
+//	public static int oceniVrsto (Vrsta v, Igra igra, Igralec jaz) {
+//		Polje[][] plosca = igra.getPlosca();
+//		int count_belo = 0;
+//		int count_crno = 0;
+//		for (int k = 0; k < Igra.N && (count_crno == 0 || count_belo == 0); k++) {
+//			switch (plosca[v.x[k]][v.y[k]]) {
+//			case BELO: count_belo += 1; break;
+//			case CRNO: count_crno += 1; break;
+//			case PRAZNO: break;
+//			}
+//		}
+//		if (count_belo > 0 && count_crno > 0) { return 0; }
+//		else if (jaz == Igralec.BELI) { return count_belo - count_crno; }
+//		else { return count_crno - count_belo; }
+//	}
 
 	
 	// Nakljucna ocena pozicije.

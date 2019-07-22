@@ -3,13 +3,14 @@ package logika;
 
 import inteligenca.*;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import gui.GlavnoOkno;
 
 
 public class Vodja {
+	
+	private Random random;
 	
 	// Glavno okno
 	private GlavnoOkno okno;
@@ -22,6 +23,7 @@ public class Vodja {
 	public boolean clovekNaVrsti;
 		
 	public Vodja(GlavnoOkno okno) {
+		random = new Random();
 		this.okno = okno;
 		clovekNaVrsti = true;
 	}
@@ -45,8 +47,8 @@ public class Vodja {
 		case NA_POTEZI_C: 
 			if (igra.naPotezi == clovek) {
 				clovekNaVrsti = true;
-//			} else {
-//				racunalnikovaPoteza();
+				} else {
+				racunalnikovaPoteza();
 			}			
 		}
 	}
@@ -62,8 +64,8 @@ public class Vodja {
 	public void clovekovaPoteza(Poteza poteza) {
 		igra.narediPotezo(poteza);
 		System.out.println("Delam potezo" + poteza);
-			// clovekNaVrsti = false;	
-			igramo();
+		clovekNaVrsti = false;
+		igramo();
 		
 		
 	}
