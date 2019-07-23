@@ -5,6 +5,8 @@ import inteligenca.*;
 
 import java.util.*;
 
+import javax.swing.SwingWorker;
+
 import gui.GlavnoOkno;
 
 
@@ -35,10 +37,10 @@ public class Vodja {
 		igramo();
 	}
 	
-	@SuppressWarnings("static-access")
+	
 	public void igramo () {
 		okno.osveziGUI();
-		switch (igra.stanjeIgre) {
+		switch (Igra.stanjeIgre) {
 		case ZMAGA_BELI: 
 		case ZMAGA_CRNI: 
 		case NEODLOCENO: 
@@ -54,6 +56,30 @@ public class Vodja {
 	}
 	
 	public void racunalnikovaPoteza() {
+		SwingWorker<Poteza, Void> worker = new SwingWorker<Poteza, Void> () {
+			private Igra zacetnaIgra = igra;
+			@Override
+			protected Poteza doInBackground() {
+				return AlphaBeta.alphabetaV (igra, clovek.nasprotnik());
+			}
+			@Override
+			protected void done () {
+				Poteza poteza;
+				try {
+					poteza = get();
+					if (poteza != null && zacetnaIgra == igra) 
+					{igra.narediPotezo(poteza);
+					igramo();
+					}
+				} catch (Exception e) {};		
+			}		
+		};
+		worker.execute();
+	}
+	
+
+	// racunalnikova poteza za minimax (zbrisi)
+	public void racunalnikovaPotezaMinimax() {
 		List<OcenjenaPoteza> ocenjenePoteze = Minimax.oceniPoteze (igra, 2, clovek.nasprotnik());
 		Poteza poteza = Minimax.maxPoteza(ocenjenePoteze);
 		igra.narediPotezo(poteza);

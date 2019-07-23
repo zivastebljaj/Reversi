@@ -173,7 +173,7 @@ public class Igra {
 				plosca[x][y] = naPotezi.getPolje();
 				for(int[] zacetnoPolje : zacetnaPolja){
 					pobarvajMed(zacetnoPolje, polje);
-					System.out.println("barvam med" + zacetnoPolje[0] + ", " + zacetnoPolje[1] + " in "+polje[0] + ", " + polje[1]);
+					//System.out.println("barvam med" + zacetnoPolje[0] + ", " + zacetnoPolje[1] + " in "+polje[0] + ", " + polje[1]);
 						}
 					
 					}
