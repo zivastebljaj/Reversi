@@ -6,6 +6,8 @@ import java.util.*;
 
 import logika.*;
 
+import logika.Igra;
+
 public class Minimax {
 	
 	private static final Random RANDOM = new Random();
@@ -35,7 +37,7 @@ public class Minimax {
 		case NEODLOCENO: return (NEODLOCEN);
 		default:
 		// Nekdo je na potezi
-		if (globina == 0) {return oceniPozicijoA(igra, jaz);}
+		if (globina == 0) {return oceniPozicijo(igra, jaz);}
 		// globina > 0
 	    List<OcenjenaPoteza> ocenjenePoteze = oceniPoteze(igra, globina, jaz);
 		if (igra.naPotezi == jaz) {return maxOcena(ocenjenePoteze);}
@@ -71,34 +73,18 @@ public class Minimax {
 		return min;
 	}
 	
-	// Metoda oceniPozicijo je odvisna od igre !!!
-	//public static int oceniPozicijo(Igra igra, Igralec jaz) {
-	//	int ocena = 0;
-	//	for (Vrsta v : Igra.VRSTE) {
-	//		ocena = ocena + oceniVrsto(v, igra, jaz);
-	//	}
-	//	return ocena;	
-	//}
 	
-//	public static int oceniVrsto (Vrsta v, Igra igra, Igralec jaz) {
-//		Polje[][] plosca = igra.getPlosca();
-//		int count_belo = 0;
-//		int count_crno = 0;
-//		for (int k = 0; k < Igra.N && (count_crno == 0 || count_belo == 0); k++) {
-//			switch (plosca[v.x[k]][v.y[k]]) {
-//			case BELO: count_belo += 1; break;
-//			case CRNO: count_crno += 1; break;
-//			case PRAZNO: break;
-//			}
-//		}
-//		if (count_belo > 0 && count_crno > 0) { return 0; }
-//		else if (jaz == Igralec.BELI) { return count_belo - count_crno; }
-//		else { return count_crno - count_belo; }
-//	}
+	@SuppressWarnings("static-access")
+	public static int oceniPozicijo(Igra igra, Igralec jaz) {
+		int stBeli = igra.stevecBelih;
+		int stCrni = igra.stevecCrnih;
+		return (jaz == Igralec.BELI ? stBeli - stCrni : stCrni - stBeli);	
+	}
+
 
 	
 	// Nakljucna ocena pozicije.
-	public static int oceniPozicijoA(Igra igra, Igralec jaz) {
+	public static int oceniPozicijoNakljucno(Igra igra, Igralec jaz) {
 		return RANDOM.nextInt(201) - 100;	
 	}
 

@@ -70,6 +70,20 @@ public class Vodja {
 		
 	}
 	
+	//preverimo èe je poteza veljavna, da ne klikamo na neveljavna polja (potrebno je še vkljuèiti)
+	//public static boolean preveriPotezo (Poteza p) {
+		//int x = p.getX();
+		//int y = p.getY();
+		//for (int[] smer : Igra.smeri) {
+			//int dx = smer[0];
+			//int dy = smer[1];
+			//int k = x + dx;
+			//int l = y + dy;
+			//if (Igra.plosca[k][l] == Polje.PRAZNO) return true;			
+		//}
+		//return false;
+		//}
+	
 	
 
 }

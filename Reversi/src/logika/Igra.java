@@ -234,4 +234,8 @@ public class Igra {
 		}
 	}
 	
+	
+
+
+	
 }

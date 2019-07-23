@@ -117,10 +117,10 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == igraClovekRacunalnik) {
-			vodja.novaIgra(Igralec.CRNI);
+			vodja.novaIgra(Igralec.BELI);
 		}
 		else if (e.getSource() == igraRacunalnikClovek) {
-			vodja.novaIgra(Igralec.BELI);
+			vodja.novaIgra(Igralec.CRNI);
 		}
 		
 	}
