@@ -108,9 +108,9 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		getContentPane().add(crn, crn_layout);
 				
 		
-		// zaènemo novo igro èloveka proti raèunalniku
+		// zaènemo novo igro racunalnika proti cloveku
 		
-		vodja.novaIgra(Igralec.BELI);
+		vodja.novaIgra(Igralec.CRNI);
 	}
 	
 	
@@ -132,8 +132,8 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			crn.setText("ÈRNI: " + Integer.toString(Igra.stevecCrnih));
 		}
 		else {
-			if (Igra.stanjeIgre == Stanje.NA_POTEZI_B) status.setText("Na potezi je èrni.");
-			if (Igra.stanjeIgre == Stanje.NA_POTEZI_C) status.setText("Na potezi je beli.");
+			if (Igra.stanjeIgre == Stanje.NA_POTEZI_C) status.setText("Na potezi je èrni.");
+			if (Igra.stanjeIgre == Stanje.NA_POTEZI_B) status.setText("Na potezi je beli.");
 			if (Igra.stanjeIgre == Stanje.ZMAGA_BELI) status.setText("Zmagal je beli.");
 			if (Igra.stanjeIgre == Stanje.ZMAGA_CRNI) status.setText("Zmagal je èrni.");
 			if (Igra.stanjeIgre == Stanje.NEODLOCENO) status.setText("Neodloèeno!");

@@ -2,7 +2,6 @@ package inteligenca;
 
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 
 import logika.Igra;
@@ -11,13 +10,12 @@ import logika.Poteza;
 import logika.Stanje;
 
 public class AlphaBeta {
-private static final Random RANDOM = new Random();
 	
 	private static final int ZMAGA = (1 << 20);
 	private static final int ZGUBA = -ZMAGA;  
 	private static final int NEODLOC = 0;
 
-	private static final int GLOBINA = 8; // globalna globina algoritma minimax
+	private static final int GLOBINA = 5; // globalna globina algoritma minimax
 	
 	public static Poteza alphabetaV (Igra igra, Igralec jaz) {
 		// Na zaèetku alpha = ZGUBA in beta = ZMAGA
@@ -35,8 +33,10 @@ private static final Random RANDOM = new Random();
 		Poteza kandidat = new Poteza(key[0], key[1]);
 		for (int[] k : moznePoteze.keySet() ) {
 			Poteza p = new Poteza(k[0], k[1]);
-			Igra zacasna_igra = new Igra();
+			Igra zacasna_igra = new Igra(igra);
+			zacasna_igra.osveziStanje();
 			zacasna_igra.narediPotezo(p);
+			//zacasna_igra.zamenjajIgralca();
 			int ocenap = alphabetaPozicijo (zacasna_igra, globina-1, alpha, beta, jaz);
 			if (igra.naPotezi == jaz) { // Maksimiramo oceno
 				if (ocenap > ocena) { // Za alphabeta mora biti > namesto >=
@@ -78,10 +78,4 @@ private static final Random RANDOM = new Random();
 		return (jaz == Igralec.BELI ? stBeli - stCrni : stCrni - stBeli);	
 	}
 
-
-	
-	// Nakljucna ocena pozicije.
-	public static int oceniPozicijoNakljucno(Igra igra, Igralec jaz) {
-		return RANDOM.nextInt(201) - 100;	
-	}
 }

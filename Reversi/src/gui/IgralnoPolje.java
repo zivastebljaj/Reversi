@@ -15,13 +15,13 @@ import logika.Vodja;
 public class IgralnoPolje extends JPanel implements MouseListener {
 	private Vodja vodja;
 	
-	private final static double LINE_WIDTH = 0.1;
+	private final static double LINE_WIDTH = 0.05;
 	
 	private final static double PADDING = 0.1;
 	
 	public IgralnoPolje(Vodja vodja) {
 		super();
-		setBackground(Color.getHSBColor(101, 28, 82));
+		setBackground(Color.getHSBColor(30, 100, 120));
 		this.addMouseListener(this);
 		
 		this.vodja = vodja;
@@ -86,8 +86,8 @@ public class IgralnoPolje extends JPanel implements MouseListener {
 		System.out.println(vodja);
 		
 		Polje[][] plosca;;
-		if (vodja.igra != null) {
-			plosca = vodja.igra.plosca;
+		if (Vodja.igra != null) {
+			plosca = Vodja.igra.plosca;
 			for (int i = 0; i < Igra.N; i++) {
 				for (int j = 0; j < Igra.N; j++) {
 					switch(plosca[i][j]) {

@@ -17,10 +17,11 @@ public class Igra {
 	// Igralec, ki je trenutno na potezi.
 	public Igralec naPotezi;
 	
-	//public za test
+	//stevec belih in crnih polj
 	public static int stevecBelih;
 	public static int stevecCrnih;
 	
+	//ali je igra se v teku (nekdo je na potezi) ali ne
 	public static Stanje stanjeIgre;
 	
 	
@@ -40,10 +41,10 @@ public class Igra {
 		plosca[3][4] = Polje.CRNO;
 		plosca[4][3] = Polje.CRNO;
 		
-		naPotezi = Igralec.CRNI;
+		naPotezi = Igralec.BELI;
 		stevecBelih = 2;
 		stevecCrnih = 2;
-		stanjeIgre = Stanje.NA_POTEZI_C;
+		stanjeIgre = Stanje.NA_POTEZI_B;
 	}
 	
 	//za minmax
@@ -65,7 +66,6 @@ public class Igra {
 						while ((0 <= k) &&(k <= 7) && (0 <= l) && (l <= 7)) {
 							if (plosca[k][l] == naPotezi.getPolje()) break;							
 							else if (plosca[k][l] == Polje.PRAZNO && plosca[k-dx][l-dy] == naPotezi.nasprotnik().getPolje()) {
-								//System.out.println("y");
 								int[] zacetnoPolje = new int[2];
 								zacetnoPolje[0] = i;
 								zacetnoPolje[1] = j;
@@ -74,13 +74,11 @@ public class Igra {
 								koncnoPolje[1] = l;
 								Set<int[]> moznePoteze = poteze.keySet();
 								int[] polje = vsebuje(moznePoteze, koncnoPolje);
-								//System.out.println("Polje = " + polje[0] + polje[1]);
 								if(polje != null) {
 									poteze.get(polje).add(zacetnoPolje);
 									break;
 									}
 								else if (polje == null)  {
-									//System.out.println("polje je null");
 									Set<int[]> zacetnaPolja = new HashSet<int[]>();
 									zacetnaPolja.add(zacetnoPolje);
 									poteze.put(koncnoPolje, zacetnaPolja);
@@ -96,10 +94,9 @@ public class Igra {
 					}
 				}
 			}
-		//printPoteze(poteze);
 		return poteze;
 	}
-	
+	// Pomozna funkcija, da vemo, ce mnozica ze vsebuje neko polje.
 	public int[] vsebuje(Set<int[]> polja, int[] polje) {
 		if (polja.size() == 0) return null;
 		else {
@@ -132,21 +129,17 @@ public class Igra {
 
 		int i = x1 + dx;
 		int j = y1 + dy;
-		//System.out.println(i + ", " +j);
-		//System.out.println("*" + dx + ", " +dy + "*");
 		while ((i<=7) && (j<=7)) {
 			if (plosca[i][j] == naPotezi.nasprotnik().getPolje()) {
 				plosca[i][j] = naPotezi.getPolje();
 				i += dx;
 				j += dy;
-				//System.out.println(i + ", " +j);
 			}
-
 			else break;
 		}
 		
 	}
-	//Če možnih potez ni več, igro končamo. Sicer pobarvamo ustrezna polja in zamenjamo igralca.
+	//Naredimo potezo. Tu predvidevamo, da je poteza veljavna.
 	public void narediPotezo(Poteza poteza) {
 		Map <int[], Set<int[]>> moznePoteze = moznePoteze();
 		int x = poteza.getX();
@@ -154,40 +147,22 @@ public class Igra {
 		int[] polje = {x, y};
 		boolean stikalo = false;
 		Set<int[]> zacetnaPolja = new HashSet<int[]>();
-		if (moznePoteze().size() == 0) {
-			prestejPolja();
-			if (stevecBelih < stevecCrnih) stanjeIgre = Stanje.ZMAGA_CRNI;
-			else if (stevecBelih > stevecCrnih) stanjeIgre = Stanje.ZMAGA_BELI;
-			else stanjeIgre = Stanje.NEODLOCENO;
-			}
-		else {
-			for (int[] koncnoPolje : moznePoteze.keySet()) {
-				if (Arrays.equals(koncnoPolje, polje)) {
-					zacetnaPolja = moznePoteze.get(koncnoPolje);
-					//System.out.println("Koncno polje = " + koncnoPolje[0] +", " + koncnoPolje[1]);
-					//for (int[] p: zacetnaPolja) System.out.println(polje[0] + "#" + polje[1]);
-					stikalo = true;
-					}
-			}
-			if (stikalo) {
-				plosca[x][y] = naPotezi.getPolje();
-				for(int[] zacetnoPolje : zacetnaPolja){
-					pobarvajMed(zacetnoPolje, polje);
-					//System.out.println("barvam med" + zacetnoPolje[0] + ", " + zacetnoPolje[1] + " in "+polje[0] + ", " + polje[1]);
-						}
-					
-					}
+		for (int[] koncnoPolje : moznePoteze.keySet()) {
+			if (Arrays.equals(koncnoPolje, polje)) {
+				zacetnaPolja = moznePoteze.get(koncnoPolje);
+				stikalo = true;
+				}
+		}
+		if (stikalo) {
+			plosca[x][y] = naPotezi.getPolje();
+			for(int[] zacetnoPolje : zacetnaPolja){
+				pobarvajMed(zacetnoPolje, polje);
+				}
 			prestejPolja();
 			naPotezi = naPotezi.nasprotnik();
-			if (stanjeIgre == Stanje.NA_POTEZI_B) stanjeIgre = Stanje.NA_POTEZI_C;
-			else if (stanjeIgre == Stanje.NA_POTEZI_C) stanjeIgre = Stanje.NA_POTEZI_B;
-			//printPlosca(plosca);
-				}
-			
-			
-		
-	}
-	//Da vemo, kdo je zmagovalec, preštejemo število črnih in belih polj.
+			}
+		}
+	//Preštejemo število črnih in belih polj.
 	public void prestejPolja() {
 		stevecBelih = 0;
 		stevecCrnih = 0;
@@ -198,43 +173,37 @@ public class Igra {
 			}
 		}
 	}
-	public void printPoteze(Map<int[], Set<int[]>> poteze) {
-		if (poteze.size() == 0)System.out.println("Prazno");
-		else {
-			for(int[] koncnoPolje : poteze.keySet()) {
-				System.out.print(koncnoPolje[0]+ ", " + koncnoPolje[1] + " : ");
-				Set<int[]> moznaPolja = poteze.get(koncnoPolje);
-				if (moznaPolja == null) System.out.print("ni poteze");
-				else {
-					for (int[] polje : moznaPolja) {
-						System.out.print("#" + polje[0] + ", " + polje[1]);
-					}
-					System.out.println();
-				}
-			}
-			
-		}
-	}
-	public static String pretvoriPolje(Polje p) {
-		if (p == Polje.PRAZNO) return " ";
-		if (p == Polje.CRNO) return "*";
-		else return "o";
-	}
-	
-	public static void printPlosca(Polje[][] M) {
-		if (M == null) System.out.println("null");
-		else {
-			for (int i = 0; i < M.length; i++) {
-				for (int j = 0; j < M[0].length; j++) {
-					if (j == 0) System.out.print("|");
-					System.out.print(pretvoriPolje(M[i][j]) + " |");
-				}
-				System.out.println();
+	//Preverimo, ali je se kaksna mozna poteza, tj. ce je igre konec ali ne.
+	public void osveziStanje() {
+		if (moznePoteze().size() == 0) {
+			prestejPolja();
+			if (stevecBelih < stevecCrnih) stanjeIgre = Stanje.ZMAGA_CRNI;
+			else if (stevecBelih > stevecCrnih) stanjeIgre = Stanje.ZMAGA_BELI;
+			else stanjeIgre = Stanje.NEODLOCENO;
 			}
 		}
+		
+	// Zamenjamo igralca na potezi in spremenimo stanje igre.
+	/*public void zamenjajIgralca(){
+		prestejPolja();
+		naPotezi = naPotezi.nasprotnik();
+		
+	}*/
+	public void zamenjajStanje() {
+		if (stanjeIgre == Stanje.NA_POTEZI_B) stanjeIgre = Stanje.NA_POTEZI_C;
+		else if (stanjeIgre == Stanje.NA_POTEZI_C) stanjeIgre = Stanje.NA_POTEZI_B;
 	}
 	
-	
+	public Igra(Igra igra) {
+		plosca = new Polje[N][N];
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				plosca[i][j] = igra.plosca[i][j];
+			}
+		}
+		this.naPotezi = igra.naPotezi;
+	}
+
 
 
 	
